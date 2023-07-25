@@ -1,12 +1,10 @@
-import { UserButton } from "@clerk/nextjs"
 
-const dashboardPage = () => {
+const DashboardPage = () => {
     return (
         <div>
             <h1>Dashboard</h1>
-            <UserButton />
         </div>
     )
  }
 
-export default dashboardPage
+export default DashboardPage
