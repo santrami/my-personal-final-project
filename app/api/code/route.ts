@@ -8,7 +8,10 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-
+const instructionMessage : ChatCompletionRequestMessage = {
+    role: "system",
+    content: "Your name is Heraclitus. You are a code generator. You must answer only in markdown snippets. Use code comments for explanations."
+}
 
 export async function POST(
     req: Request
@@ -32,13 +35,13 @@ export async function POST(
 
         const response = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
-            messages
+            messages: [instructionMessage, ...messages]
         });
 
         return NextResponse.json(response.data.choices[0].message);
 
     } catch (error) {
-        console.error("[CODE_ERROR]", error)
+        console.error("[CONVERSATION_ERROR]", error)
         return new NextResponse("internal error",{status:500})
     }
 }   
