@@ -18,8 +18,10 @@ import { Button } from "@/components/ui/button";
 import { ChatCompletionRequestMessage } from "openai";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const Conversation = () => {
+  const proModal = useProModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -46,9 +48,10 @@ const Conversation = () => {
       setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();
-      //TODO: Open Pro Modal
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      if(error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }

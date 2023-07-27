@@ -14,8 +14,10 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const VideoGeneration = () => {
+  const proModal = useProModal();
   const router = useRouter();
   const [video, setVideo] = useState<string>();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -36,8 +38,10 @@ const VideoGeneration = () => {
       setVideo(response.data[0]);
       form.reset();
       //TODO: Open Pro Modal
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      if(error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }

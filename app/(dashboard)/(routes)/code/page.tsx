@@ -19,8 +19,10 @@ import { ChatCompletionRequestMessage } from "openai";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const CodePage = () => {
+  const proModal=useProModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,8 +50,10 @@ const CodePage = () => {
 
       form.reset();
       //TODO: Open Pro Modal
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      if(error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }

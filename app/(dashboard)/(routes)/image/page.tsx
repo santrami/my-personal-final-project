@@ -17,8 +17,12 @@ import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const ImagePage = () => {
+
+  const proModal= useProModal();
+
   const router = useRouter();
 
   const [images, setImages] = useState<string[]>([]);
@@ -45,8 +49,10 @@ const ImagePage = () => {
       setImages(urls);
       form.reset();
       //TODO: Open Pro Modal
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      if(error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }
