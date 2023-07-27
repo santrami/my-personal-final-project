@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { Heading } from "@/components/heading";
-import { Music } from "lucide-react";
+import { Voicemail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Empty } from "@/components/empty";
@@ -15,9 +15,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 
-const MusicGeneration = () => {
+const SpeechGeneration = () => {
   const router = useRouter();
-  const [music, setMusic] = useState<string>();
+  const [speech, setSpeech] = useState<string>();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,11 +29,11 @@ const MusicGeneration = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setMusic(undefined)
+      setSpeech(undefined)
 
-      const response = await axios.post("/api/music", values);
+      const response = await axios.post("/api/text-to-speech", values);
 
-      setMusic(response.data.audio);
+      setSpeech(response.data);
       form.reset();
       //TODO: Open Pro Modal
     } catch (error) {
@@ -46,9 +46,9 @@ const MusicGeneration = () => {
   return (
     <div>
       <Heading
-        title="Music Generation"
-        description="Turn your prompt into a song."
-        icon={Music}
+        title="Speech Generation"
+        description="Turn your prompt into a speech."
+        icon={Voicemail}
         iconColor="text-emerald-500"
         bgColor="bg-emerald-500/10"
       />
@@ -68,7 +68,7 @@ const MusicGeneration = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="Piano solo"
+                        placeholder="say something..."
                         {...field}
                       />
                     </FormControl>
@@ -90,14 +90,14 @@ const MusicGeneration = () => {
               <Loader />
             </div>
           )}
-          {!music && !isLoading && (
+          {!speech && !isLoading && (
             <div>
-              <Empty label="No music generated" />
+              <Empty label="No speech generated" />
             </div>
           )}
-          {music && (
+          {speech && (
             <audio controls className="w-full mt-8">
-              <source src={music} />
+              <source src={speech} />
             </audio>
           )}
         </div>
@@ -106,4 +106,4 @@ const MusicGeneration = () => {
   );
 };
 
-export default MusicGeneration;
+export default SpeechGeneration;

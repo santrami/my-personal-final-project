@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Code, ImageIcon, MessageSquare, Music, VideoIcon } from "lucide-react";
+import { ArrowRight, Code, ImageIcon, MessageSquare, Music, VideoIcon, Voicemail } from "lucide-react";
 import { useRouter } from "next/navigation";
 const tools = [
     {
@@ -13,11 +13,11 @@ const tools = [
       href: "/conversation",
     },
     {
-      label: "Music Generation",
-      icon: Music,
-      color: "text-emerald-500",
-      bgColor: "bg-emerald-500/10",
-      href: "/music",
+      label: "Code Generation",
+      icon: Code,
+      color: "text-green-500",
+      bgColor: "bg-green-500/10",
+      href: "/code",
     },
     {
       label: "image Generation",
@@ -34,11 +34,18 @@ const tools = [
       href: "/video",
     },
     {
-      label: "Code Generation",
-      icon: Code,
-      color: "text-green-500",
-      bgColor: "bg-green-500/10",
-      href: "/code",
+      label: "Music Generation",
+      icon: Music,
+      color: "text-emerald-500",
+      bgColor: "bg-emerald-500/10",
+      href: "/music",
+    },
+    {
+      label: "Speech Generation",
+      icon: Voicemail,
+      color: "text-red-500",
+      bgColor: "bg-red-500/10",
+      href: "/text-to-speech",
     },
   ];
 const DashboardPage = () => {

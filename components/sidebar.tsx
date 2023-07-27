@@ -6,7 +6,7 @@ import { Montserrat } from "next/font/google";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import { Code, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, VideoIcon } from "lucide-react";
+import { Code, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, VideoIcon, Voicemail } from "lucide-react";
 
 const monserrat = Montserrat({
   weight: "600",
@@ -27,6 +27,12 @@ const routes = [
     color: "text-sky-500",
   },
   {
+    label: "Code Generation",
+    icon: Code,
+    href: "/code",
+    color: "text-green-700",
+  },
+  {
     label: "Image Generation",
     icon: ImageIcon,
     href: "/image",
@@ -45,10 +51,10 @@ const routes = [
     color: "text-emerald-500",
   },
   {
-    label: "Code Generation",
-    icon: Code,
-    href: "/code",
-    color: "text-green-700",
+    label: "Speech Generation",
+    icon: Voicemail,
+    href: "/text-to-speech",
+    color: "text-red-500",
   },
   {
     label: "Settings",
