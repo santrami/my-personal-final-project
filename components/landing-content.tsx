@@ -4,11 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const testimonials = [
   {
-    name: "John Doe",
+    name: "Santiago Ramirez",
     title: "CEO",
-    company: "Acme Inc.",
+    company: "Heraclitus",
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam quis aliquam faucibus, nibh nisl ultricies nunc, quis aliquam nisl nunc eu nisi. Sed euismod, diam quis aliquam faucibus, nibh nisl ultricies nunc, quis aliquam nisl nunc eu nisi.",
+      "Has been a wonderful experience working with this team. They are very professional and always on time. I would recommend them to anyone.",
       description: "Best app ever",
       avatar: "A"
   },
