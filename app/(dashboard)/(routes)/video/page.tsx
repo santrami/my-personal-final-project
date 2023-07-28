@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/loader";
 import { useProModal } from "@/hooks/use-pro-modal";
+import toast from "react-hot-toast";
 
 const VideoGeneration = () => {
   const proModal = useProModal();
@@ -41,6 +42,8 @@ const VideoGeneration = () => {
     } catch (error:any) {
       if(error?.response?.status === 403) {
         proModal.onOpen();
+      }else{
+        toast.error("Sorry. Something went wrong")
       }
     } finally {
       router.refresh();

@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Empty } from "@/components/empty";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
+import { toast } from "react-hot-toast";
 
 import { formSchema } from "./constants";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
@@ -49,10 +50,12 @@ const CodePage = () => {
       setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();
-      //TODO: Open Pro Modal
+      //TODO: Open Pro Modal // DONE!!!
     } catch (error:any) {
       if(error?.response?.status === 403) {
         proModal.onOpen();
+      }else{
+        toast.error("Sorry. Something went wrong")
       }
     } finally {
       router.refresh();
