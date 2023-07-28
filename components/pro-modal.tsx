@@ -116,7 +116,7 @@ export const ProModal = () => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={onSubscribe} className="w-full" size="lg" variant="premium">
+            <Button disabled={loading} onClick={onSubscribe} className="w-full" size="lg" variant="premium">
                 Upgrade
                 <Zap className="w-4 h-4 ml-2 fill-white"/>
             </Button>

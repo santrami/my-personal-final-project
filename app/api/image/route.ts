@@ -3,18 +3,13 @@ import { NextResponse } from "next/server";
 import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
 
 import { increaseApiLimit, checkApiLimit } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
-
-const instructionMessage: ChatCompletionRequestMessage = {
-  role: "system",
-  content:
-    "Your name is Heraclitus. You have all capabilities of a philosopher and also all your own capabilities. You must answer in a philosophical way.",
-};
 
 export async function POST(req: Request) {
   try {
@@ -43,8 +38,10 @@ export async function POST(req: Request) {
     }
 
     const freeTrial = await checkApiLimit();
+    const isPro = await checkSubscription();
+    alert(isPro)
 
-    if (!freeTrial) {
+    if (!freeTrial && !isPro) {
       return new NextResponse("free trial limit reached", { status: 403 });
     }
 
@@ -54,7 +51,9 @@ export async function POST(req: Request) {
       size: resolution,
     });
 
-    await increaseApiLimit();
+    if (!isPro) {
+      await increaseApiLimit();
+    }
 
     return NextResponse.json(response.data.data);
   } catch (error) {
