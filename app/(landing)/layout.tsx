@@ -9,3 +9,5 @@ const LandingLayout = ({ children }: {
         </main>
     )
 }
+
+export default LandingLayout;

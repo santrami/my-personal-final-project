@@ -26,6 +26,13 @@ export const LandingNavbar = () => {
           Heraclitus
         </h1>
       </Link>
+      <div className="flex items-center gap-x-2">
+        <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
+            <Button variant="outline" className="rounded-full">
+                Get Started with Heraclitus
+            </Button>
+        </Link>
+      </div>
     </nav>
   );
 };
