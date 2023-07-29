@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       return new NextResponse("prompt is required", { status: 400 });
     }
 
-    if (!prompt) {
+    if (!amount) {
       return new NextResponse("amount is required", { status: 400 });
     }
 
@@ -39,7 +39,6 @@ export async function POST(req: Request) {
 
     const freeTrial = await checkApiLimit();
     const isPro = await checkSubscription();
-    alert(isPro)
 
     if (!freeTrial && !isPro) {
       return new NextResponse("free trial limit reached", { status: 403 });
