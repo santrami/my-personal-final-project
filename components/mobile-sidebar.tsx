@@ -2,34 +2,45 @@
 
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import Sidebar from "@/components/sidebar";
 import { useEffect, useState } from "react";
 
 interface MobileSidebarProps {
   apiLimitCount: number;
-  isPro:boolean;
+  isPro: boolean;
 }
 
-const MobileSidebar = ({apiLimitCount=0, isPro=false}:MobileSidebarProps) => {
-    const [isMounted, setIsMounted] = useState(false);
+const MobileSidebar = ({
+  apiLimitCount = 0,
+  isPro = false,
+}: MobileSidebarProps) => {
+  const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-    if (!isMounted) return null;
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
+
   return (
     <Sheet>
       <SheetTrigger>
         <Button variant="ghost" size="icon" className="md:hidden">
-          <Menu></Menu>
+          <Menu />
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0">
-        <Sidebar isPro={isPro} apiLimitCount={apiLimitCount}/>
+        
+          <Sidebar isPro={isPro} apiLimitCount={apiLimitCount} />
+         
       </SheetContent>
     </Sheet>
-    
   );
 };
 
