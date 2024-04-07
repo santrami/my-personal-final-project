@@ -11,6 +11,8 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+const roles = [{ role: "Heraclitus", persona: "Heraclitus" }, ]
+
 const instructionMessage: ChatCompletionRequestMessage = {
   role: "system",
   content:
